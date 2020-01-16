@@ -34,6 +34,7 @@ end
 # Your code after this point
 
 def movies_with_director_key(name, movies_collection)
+  
   # GOAL: For each Hash in an Array (movies_collection), provide a collection
   # of movies and a directors name to the movie_with_director_name method
   # and accumulate the returned Array of movies into a new Array that's
@@ -48,6 +49,14 @@ def movies_with_director_key(name, movies_collection)
   # Array of Hashes where each Hash represents a movie; however, they should all have a
   # :director_name key. This addition can be done by using the provided
   # movie_with_director_name method
+  
+  new_array = []
+  index = 0
+  while index < movies_collection.count do
+    new_array << movie_with_director_name(name, movies_collection[index])
+    index += 1
+  end
+  new_array
 end
 
 
@@ -57,12 +66,31 @@ def gross_per_studio(collection)
   # each studio.
   #
   # INPUT:
-  # * collection: Array of Hashes where each Hash where each Hash represents a movie
+  # * collection: Array of Hashes where each Hash represents a movie
   #
   # RETURN:
   #
   # Hash whose keys are the studio names and whose values are the sum
   # total of all the worldwide_gross numbers for every movie in the input Hash
+  
+  new_hash = {}
+  index = 0
+  while index < collection.count do
+
+    # if the studio is in the hash it adds the gross to the amount
+    if new_hash.include?(collection[index][:studio])
+      new_hash[collection[index][:studio]] += collection[index][:worldwide_gross]
+    end
+    
+    # if the studio in the hash, it adds the studio as the key and the gross as the base amount
+    unless new_hash.include?(collection[index][:studio])
+      new_hash[collection[index][:studio]] = collection[index][:worldwide_gross]
+    end
+      
+    index += 1
+  end
+  p new_hash
+
 end
 
 def movies_with_directors_set(source)
@@ -76,6 +104,16 @@ def movies_with_directors_set(source)
   #
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
+  
+  new_aoa = [[], []]
+  outer_index = 0
+  while outer_index < source.count do
+
+    new_aoa[outer_index] = movies_with_director_key(source[outer_index][:name], source[outer_index][:movies])
+
+    outer_index += 1
+  end
+  new_aoa
 end
 
 # ----------------    End of Your Code Region --------------------
