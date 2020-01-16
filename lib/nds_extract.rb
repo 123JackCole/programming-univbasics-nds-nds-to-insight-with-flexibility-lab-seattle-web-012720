@@ -74,6 +74,7 @@ def gross_per_studio(collection)
   # total of all the worldwide_gross numbers for every movie in the input Hash
   
   new_hash = {}
+<<<<<<< HEAD
   index = 0
   while index < collection.count do
 
@@ -82,7 +83,7 @@ def gross_per_studio(collection)
       new_hash[collection[index][:studio]] += collection[index][:worldwide_gross]
     end
     
-    # if the studio in the hash, it adds the studio as the key and the gross as the base amount
+    # if the studio is not in the hash, it adds the studio as the key and the gross as the base amount
     unless new_hash.include?(collection[index][:studio])
       new_hash[collection[index][:studio]] = collection[index][:worldwide_gross]
     end
@@ -91,6 +92,21 @@ def gross_per_studio(collection)
   end
   p new_hash
 
+=======
+  total_gross = 0
+  index = 0
+  current_studio = collection[index][:studio]
+  while index < collection.count do
+    if current_studio != collection[index][:studio]
+      total_gross = 0
+    end
+    total_gross += collection[index][:worldwide_gross]
+    new_hash[collection[index][:studio]] = total_gross
+    index += 1
+  end
+  new_hash
+  
+>>>>>>> 66116a4512aa7e2842a437cd4c58c30091324d18
 end
 
 def movies_with_directors_set(source)
@@ -105,6 +121,11 @@ def movies_with_directors_set(source)
   # Array of Arrays containing all of a director's movies. Each movie will need
   # to have a :director_name key added to it.
   
+<<<<<<< HEAD
+=======
+  p source
+  
+>>>>>>> 66116a4512aa7e2842a437cd4c58c30091324d18
   new_aoa = [[], []]
   outer_index = 0
   while outer_index < source.count do
